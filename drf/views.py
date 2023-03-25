@@ -12,8 +12,7 @@ class TestView(APIView):
 
     def get(self, request, *args, **kwargs):
         qs = Student.objects.all()
-        student1 = qs.first()
-        serializer = StudentSerializer(student1)
+        serializer = StudentSerializer(qs, many=True)
         return Response(serializer.data)
     def post(self, request, *args, **kwargs):
         serializer = StudentSerializer(data=request.data)
