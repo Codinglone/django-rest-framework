@@ -6,11 +6,8 @@ from drfapp.models import Student
 
 class TestView(APIView):
     def get(self, request, *args, **kwargs):
-        data = {
-            'username': 'admin',
-            'years_active': 10,
-        }
-
+        qs = Student.objects.all()
+        serializer = StudentSerializer(qs, many=True)
         return Response(data)
     def post(self, request, *args, **kwargs):
         serializer = StudentSerializer(data=request.data)
